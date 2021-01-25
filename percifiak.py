@@ -24,6 +24,8 @@ def init_webdriver(debug, firefox_location)-> webdriver:
     browser = webdriver.Firefox(
         executable_path='selenium/geckodriver.exe', service_log_path='selenium/geckodriver.log', options=options)
 
+    # browser.maximize_window()
+
     return browser
 
 
@@ -138,12 +140,11 @@ def main():
 
         print("Fin du cours : " + course)
 
-        # test_url = tools.check_for_test()
-        #
-        # if test_url != '':
-        #     browser.get(test_url)
-        #
-        #     tools.passing_test()
+        test_url = tools.check_for_test()
+
+        if test_url != '':
+            browser.get(test_url)
+            tools.passing_test()
 
     print('Tout les cours sont fini !')
 
