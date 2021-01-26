@@ -110,17 +110,24 @@ def main():
 
     tools.go_to_assignement()
 
+    sleep(2)
+
+    courses, videos = tools.get_all_cours()
+
     sleep(1)
 
-    # TODO Récupération des cours à faire
-    courses = ['f44f856e-1bcc-11e7-b15b-0242c0a80b07', 'f44fac7d-1bcc-11e7-b15b-0242c0a80b07',
-               'f44ffa91-1bcc-11e7-b15b-0242c0a80b07', 'f44ffa9b-1bcc-11e7-b15b-0242c0a80b07',
-               'f45021ad-1bcc-11e7-b15b-0242c0a80b07', 'f45096d8-1bcc-11e7-b15b-0242c0a80b07',
-               'f450e4f9-1bcc-11e7-b15b-0242c0a80b07', 'fe198c4e-e4cb-11e6-8282-0242c0a80a04',
-               'fe19da6a-e4cb-11e6-8282-0242c0a80a04', 'fe1a0171-e4cb-11e6-8282-0242c0a80a04',
-               'fe1a0183-e4cb-11e6-8282-0242c0a80a04']
+    for video in videos:
+        print("Début video : " + video)
+        tools.get_video(video)
 
-    videos = ['67c3943a-7d5d-48a1-af4b-bf4d36cfa2e3', '42a31e08-ff7d-11e6-8638-0242c0a80b06']
+        tools.launch_video()
+
+        while browser.find_element_by_xpath("//div[@class='jw-icon jw-icon-inline "
+                                            "jw-button-color jw-reset jw-icon-playback']").get_attribute('aria-label') \
+                != 'Play':
+            sleep(10)
+
+        print("Fin video : " + video)
 
     for course in courses:
 

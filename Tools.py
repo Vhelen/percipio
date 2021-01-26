@@ -60,8 +60,32 @@ class Tools:
 
         return True
 
-    def get_cours(self, course_id: str) -> None:
-        self.browser.get(self.url + '/courses/' + course_id)
+    def get_all_cours(self):
+        btn_show_detail = self.browser.find_elements_by_xpath(
+            "//button[@class='Button---root---2BQqW Button---flat---fb6Ta "
+            "Button---medium---1CC5_ Button---center---13Oaw']")
+
+        for btn in btn_show_detail:
+            btn.click()
+            sleep(1)
+
+        a_courses = self.browser.find_elements_by_xpath("//a[@class='Link---root---U3vzY Link---focus---V5Bo7']")
+
+        courses = []
+        videos = []
+        for a in a_courses:
+            if 'videos' in a.get_attribute('href'):
+                videos.append(a.get_attribute('href'))
+            elif 'courses' in a.get_attribute('href'):
+                courses.append(a.get_attribute('href'))
+
+        return courses, videos
+
+    def get_cours(self, course_url: str) -> None:
+        self.browser.get(course_url)
+
+    def get_video(self, video_url: str):
+        self.browser.get(video_url)
 
     def get_videos(self, video_id: str) -> None:
         self.browser.get(self.url + '/videos/' + video_id)
