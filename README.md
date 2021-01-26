@@ -1,5 +1,4 @@
 # Percipio
-Automatisation e-learning Percipio
 
 # Le but de l'outil
 L'outil permet d'automatiser l'e-learning sur la plateforme Percipio.
